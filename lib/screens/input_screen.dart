@@ -32,212 +32,216 @@ class _InputScreenState extends State<InputScreen> {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ReusableCard(
+                    onPressed: () => setActiveCard(Gender.male),
+                    color: selectedGender == Gender.male
+                        ? cardActiveColor
+                        : cardInactiveColor,
+                    child: IconContent(
+                      icon: Icons.male,
+                      label: 'MALE',
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setActiveCard(Gender.female);
+                    },
                     child: ReusableCard(
-                      onPressed: () => setActiveCard(Gender.male),
-                      color: selectedGender == Gender.male
+                      onPressed: () => setActiveCard(Gender.female),
+                      color: selectedGender == Gender.female
                           ? cardActiveColor
                           : cardInactiveColor,
                       child: IconContent(
-                        icon: Icons.male,
-                        label: 'MALE',
+                        icon: Icons.female,
+                        label: 'FEMALE',
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        setActiveCard(Gender.female);
-                      },
-                      child: ReusableCard(
-                        onPressed: () => setActiveCard(Gender.female),
-                        color: selectedGender == Gender.female
-                            ? cardActiveColor
-                            : cardInactiveColor,
-                        child: IconContent(
-                          icon: Icons.female,
-                          label: 'FEMALE',
-                        ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: ReusableCard(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('HEIGHT', style: labelTextStyle),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        '$height',
+                        style: numberTextStyle,
                       ),
+                      Text(
+                        'cm',
+                        style: labelTextStyle,
+                      ),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      inactiveTrackColor: Color(0xFF8D8E98),
+                      activeTrackColor: Colors.white,
+                      thumbColor: Color(0xFFEB1555),
+                      overlayColor: Color(0x29EB1555),
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape:
+                          RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
-                  )
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 100.0,
+                      max: 220.0,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
-            Expanded(
-              child: ReusableCard(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('HEIGHT', style: labelTextStyle),
-                    Row(
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ReusableCard(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
                       children: [
-                        Text(
-                          '$height',
-                          style: numberTextStyle,
+                        Text('WEIGHT', style: labelTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              '$weight',
+                              style: numberTextStyle,
+                            ),
+                            Text(
+                              'kg',
+                              style: labelTextStyle,
+                            ),
+                          ],
                         ),
-                        Text(
-                          'cm',
-                          style: labelTextStyle,
-                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                                icon: Icons.remove,
+                                onPressed: () {
+                                  if (weight > 1) {
+                                    setState(() => weight--);
+                                  }
+                                }),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                                icon: Icons.add,
+                                onPressed: () {
+                                  if (weight < 200) {
+                                    setState(() => weight++);
+                                  }
+                                }),
+                          ],
+                        )
                       ],
                     ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Color(0xFF8D8E98),
-                        activeTrackColor: Colors.white,
-                        thumbColor: Color(0xFFEB1555),
-                        overlayColor: Color(0x29EB1555),
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                        overlayShape:
-                            RoundSliderOverlayShape(overlayRadius: 30.0),
-                      ),
-                      child: Slider(
-                        value: height.toDouble(),
-                        min: 100.0,
-                        max: 220.0,
-                        onChanged: (double newValue) {
-                          setState(() {
-                            height = newValue.round();
-                          });
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ReusableCard(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('WEIGHT', style: labelTextStyle),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Text(
-                                '$weight',
-                                style: numberTextStyle,
-                              ),
-                              Text(
-                                'kg',
-                                style: labelTextStyle,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RoundIconButton(
-                                  icon: Icons.remove,
-                                  onPressed: () {
-                                    if (weight > 1) {
-                                      setState(() => weight--);
-                                    }
-                                  }),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              RoundIconButton(
-                                  icon: Icons.add,
-                                  onPressed: () {
-                                    if (weight < 200) {
-                                      setState(() => weight++);
-                                    }
-                                  }),
-                            ],
-                          )
-                        ],
-                      ),
+                Expanded(
+                  child: ReusableCard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('AGE', style: labelTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              '$age',
+                              style: numberTextStyle,
+                            ),
+                            Text(
+                              'old',
+                              style: labelTextStyle,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                                icon: Icons.remove,
+                                onPressed: () {
+                                  if (age > 1) {
+                                    setState(() => age--);
+                                  }
+                                }),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                                icon: Icons.add,
+                                onPressed: () {
+                                  if (age < 120) {
+                                    setState(() => age++);
+                                  }
+                                }),
+                          ],
+                        )
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: ReusableCard(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('AGE', style: labelTextStyle),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: [
-                              Text(
-                                '$age',
-                                style: numberTextStyle,
-                              ),
-                              Text(
-                                'old',
-                                style: labelTextStyle,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RoundIconButton(
-                                  icon: Icons.remove,
-                                  onPressed: () {
-                                    if (age > 1) {
-                                      setState(() => age--);
-                                    }
-                                  }),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              RoundIconButton(
-                                  icon: Icons.add,
-                                  onPressed: () {
-                                    if (age < 120) {
-                                      setState(() => age++);
-                                    }
-                                  }),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
-            BottomButton(
-                label: 'CALCULATE YOUR BMI',
-                onPressed: () {
-                  BmiCalculation bmiCal =
-                      BmiCalculation(height: height, weight: weight);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ResultScreen(
-                          bmiResult: bmiCal.calculateBMI(),
-                          resultText: bmiCal.getResult(),
-                          interpretation: bmiCal.getInterpretation(),
-                        );
-                      },
-                    ),
-                  );
-                })
-          ],
-        ),
+          ),
+          BottomButton(
+              label: 'CALCULATE YOUR BMI',
+              onPressed: () {
+                BmiCalculation bmiCal =
+                    BmiCalculation(height: height, weight: weight);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ResultScreen(
+                        bmiResult: bmiCal.calculateBMI(),
+                        resultText: bmiCal.getResult(),
+                        interpretation: bmiCal.getInterpretation(),
+                      );
+                    },
+                  ),
+                );
+              })
+        ],
       ),
     );
   }
