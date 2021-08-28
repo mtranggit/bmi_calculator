@@ -1,10 +1,10 @@
-import 'package:bmi_calculator/app_const.dart';
-import 'package:bmi_calculator/bmi_calculation.dart';
-import 'package:bmi_calculator/bottom_button.dart';
-import 'package:bmi_calculator/icon_content.dart';
-import 'package:bmi_calculator/result_page.dart';
-import 'package:bmi_calculator/reusable_card.dart';
-import 'package:bmi_calculator/round_icon_button.dart';
+import 'package:bmi_calculator/code/app_const.dart';
+import 'package:bmi_calculator/code/bmi_calculation.dart';
+import 'package:bmi_calculator/components/bottom_button.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/screens/result_screen.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
