@@ -5,20 +5,20 @@ import 'app_const.dart';
 class ReusableCard extends StatelessWidget {
   final Color color;
   final Widget? child;
-  final VoidCallback? onPress;
+  final VoidCallback? onPressed;
   // final Function()? onPress;
   const ReusableCard({
     Key? key,
     // required this.color,
     this.color = cardActiveColor,
     this.child,
-    this.onPress,
+    this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPress,
+      onTap: onPressed,
       child: Container(
         child: child,
         margin: EdgeInsets.all(15.0),

@@ -14,6 +14,11 @@ const labelTextStyle = TextStyle(
   color: textStyleColor,
 );
 
+const largeLabelTextStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+
 const numberTextStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,

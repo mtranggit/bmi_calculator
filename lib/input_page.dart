@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/app_const.dart';
+import 'package:bmi_calculator/bottom_button.dart';
 import 'package:bmi_calculator/icon_content.dart';
 import 'package:bmi_calculator/reusable_card.dart';
 import 'package:bmi_calculator/round_icon_button.dart';
@@ -38,7 +39,7 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      onPress: () => setActiveCard(Gender.male),
+                      onPressed: () => setActiveCard(Gender.male),
                       color: selectedGender == Gender.male
                           ? cardActiveColor
                           : cardInactiveColor,
@@ -54,7 +55,7 @@ class _InputPageState extends State<InputPage> {
                         setActiveCard(Gender.female);
                       },
                       child: ReusableCard(
-                        onPress: () => setActiveCard(Gender.female),
+                        onPressed: () => setActiveCard(Gender.female),
                         color: selectedGender == Gender.female
                             ? cardActiveColor
                             : cardInactiveColor,
@@ -215,12 +216,7 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              color: bottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: bottomContainerHeight,
-            )
+            BottomButton(label: 'CALCULATE YOUR BMI', onPressed: () {})
           ],
         ),
       ),
