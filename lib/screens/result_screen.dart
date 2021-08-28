@@ -3,12 +3,12 @@ import 'package:bmi_calculator/components/bottom_button.dart';
 import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:flutter/material.dart';
 
-class ResultPage extends StatelessWidget {
+class ResultScreen extends StatelessWidget {
   final String bmiResult;
   final String resultText;
   final String interpretation;
 
-  const ResultPage({
+  const ResultScreen({
     Key? key,
     required this.bmiResult,
     required this.resultText,

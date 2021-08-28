@@ -7,14 +7,14 @@ import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/components/round_icon_button.dart';
 import 'package:flutter/material.dart';
 
-class InputPage extends StatefulWidget {
+class InputScreen extends StatefulWidget {
   @override
-  _InputPageState createState() => _InputPageState();
+  _InputScreenState createState() => _InputScreenState();
 }
 
 enum Gender { male, female }
 
-class _InputPageState extends State<InputPage> {
+class _InputScreenState extends State<InputScreen> {
   int height = 170;
   int weight = 50;
   int age = 18;
@@ -227,7 +227,7 @@ class _InputPageState extends State<InputPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return ResultPage(
+                        return ResultScreen(
                           bmiResult: bmiCal.calculateBMI(),
                           resultText: bmiCal.getResult(),
                           interpretation: bmiCal.getInterpretation(),
