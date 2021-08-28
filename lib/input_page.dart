@@ -1,4 +1,6 @@
 import 'package:bmi_calculator/app_const.dart';
+import 'package:bmi_calculator/gender_icon.dart';
+import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
@@ -21,10 +23,20 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: [
                   Expanded(
-                    child: ReusableCard(),
+                    child: ReusableCard(
+                      child: GenderIcon(
+                        gender: Gender.male,
+                        label: 'MALE',
+                      ),
+                    ),
                   ),
                   Expanded(
-                    child: ReusableCard(),
+                    child: ReusableCard(
+                      child: GenderIcon(
+                        gender: Gender.female,
+                        label: 'FEMALE',
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -52,26 +64,6 @@ class _InputPageState extends State<InputPage> {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  final Color color;
-  const ReusableCard({
-    Key? key,
-    // required this.color,
-    this.color = cardActiveColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10.0),
       ),
     );
   }
