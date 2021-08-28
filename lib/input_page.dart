@@ -11,11 +11,11 @@ class InputPage extends StatefulWidget {
 enum Gender { male, female }
 
 class _InputPageState extends State<InputPage> {
-  Gender? activeCard;
+  Gender? selectedGender;
 
   void setActiveCard(Gender gender) {
     setState(() {
-      activeCard = gender;
+      selectedGender = gender;
     });
   }
 
@@ -33,18 +33,14 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        setActiveCard(Gender.male);
-                      },
-                      child: ReusableCard(
-                        color: activeCard == Gender.male
-                            ? cardActiveColor
-                            : cardInactiveColor,
-                        child: IconContent(
-                          icon: Icons.male,
-                          label: 'MALE',
-                        ),
+                    child: ReusableCard(
+                      onPress: () => setActiveCard(Gender.male),
+                      color: selectedGender == Gender.male
+                          ? cardActiveColor
+                          : cardInactiveColor,
+                      child: IconContent(
+                        icon: Icons.male,
+                        label: 'MALE',
                       ),
                     ),
                   ),
@@ -54,7 +50,8 @@ class _InputPageState extends State<InputPage> {
                         setActiveCard(Gender.female);
                       },
                       child: ReusableCard(
-                        color: activeCard == Gender.female
+                        onPress: () => setActiveCard(Gender.female),
+                        color: selectedGender == Gender.female
                             ? cardActiveColor
                             : cardInactiveColor,
                         child: IconContent(
