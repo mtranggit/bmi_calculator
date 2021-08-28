@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/app_const.dart';
+import 'package:bmi_calculator/bmi_calculation.dart';
 import 'package:bmi_calculator/bottom_button.dart';
 import 'package:bmi_calculator/icon_content.dart';
 import 'package:bmi_calculator/result_page.dart';
@@ -14,9 +15,9 @@ class InputPage extends StatefulWidget {
 enum Gender { male, female }
 
 class _InputPageState extends State<InputPage> {
-  int height = 180;
-  int weight = 20;
-  int age = 10;
+  int height = 170;
+  int weight = 50;
+  int age = 18;
   Gender? selectedGender;
 
   void setActiveCard(Gender gender) {
@@ -220,14 +221,16 @@ class _InputPageState extends State<InputPage> {
             BottomButton(
                 label: 'CALCULATE YOUR BMI',
                 onPressed: () {
+                  BmiCalculation bmiCal =
+                      BmiCalculation(height: height, weight: weight);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
                         return ResultPage(
-                          bmiResult: '200',
-                          resultText: 'Good BMI',
-                          interpretation: 'Excellent!',
+                          bmiResult: bmiCal.calculateBMI(),
+                          resultText: bmiCal.getResult(),
+                          interpretation: bmiCal.getInterpretation(),
                         );
                       },
                     ),
