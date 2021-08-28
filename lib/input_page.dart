@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/app_const.dart';
 import 'package:bmi_calculator/icon_content.dart';
 import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/round_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
@@ -11,6 +12,9 @@ class InputPage extends StatefulWidget {
 enum Gender { male, female }
 
 class _InputPageState extends State<InputPage> {
+  int height = 180;
+  int weight = 20;
+  int age = 10;
   Gender? selectedGender;
 
   void setActiveCard(Gender gender) {
@@ -65,16 +69,148 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Expanded(
-              child: ReusableCard(),
+              child: ReusableCard(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('HEIGHT', style: labelTextStyle),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          '$height',
+                          style: numberTextStyle,
+                        ),
+                        Text(
+                          'cm',
+                          style: labelTextStyle,
+                        ),
+                      ],
+                    ),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        inactiveTrackColor: Color(0xFF8D8E98),
+                        activeTrackColor: Colors.white,
+                        thumbColor: Color(0xFFEB1555),
+                        overlayColor: Color(0x29EB1555),
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 30.0),
+                      ),
+                      child: Slider(
+                        value: height.toDouble(),
+                        min: 100.0,
+                        max: 220.0,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: ReusableCard(),
+                    child: ReusableCard(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('WEIGHT', style: labelTextStyle),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                '$weight',
+                                style: numberTextStyle,
+                              ),
+                              Text(
+                                'kg',
+                                style: labelTextStyle,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                  icon: Icons.remove,
+                                  onPressed: () {
+                                    if (weight > 1) {
+                                      setState(() => weight--);
+                                    }
+                                  }),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundIconButton(
+                                  icon: Icons.add,
+                                  onPressed: () {
+                                    if (weight < 200) {
+                                      setState(() => weight++);
+                                    }
+                                  }),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                   Expanded(
-                    child: ReusableCard(),
+                    child: ReusableCard(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('AGE', style: labelTextStyle),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                '$age',
+                                style: numberTextStyle,
+                              ),
+                              Text(
+                                'old',
+                                style: labelTextStyle,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                  icon: Icons.remove,
+                                  onPressed: () {
+                                    if (age > 1) {
+                                      setState(() => age--);
+                                    }
+                                  }),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              RoundIconButton(
+                                  icon: Icons.add,
+                                  onPressed: () {
+                                    if (age < 120) {
+                                      setState(() => age++);
+                                    }
+                                  }),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),
