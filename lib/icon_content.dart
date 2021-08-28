@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-enum Gender { male, female }
-
-class GenderIcon extends StatelessWidget {
+class IconContent extends StatelessWidget {
   final String label;
-  final Gender gender;
+  final IconData icon;
 
-  const GenderIcon({
+  const IconContent({
     Key? key,
-    this.gender = Gender.male,
+    required this.icon,
     this.label = '',
   }) : super(key: key);
 
@@ -18,7 +16,7 @@ class GenderIcon extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          this.gender == Gender.male ? Icons.male : Icons.female,
+          icon,
           size: 80.0,
         ),
         SizedBox(

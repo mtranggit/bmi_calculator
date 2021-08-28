@@ -1,5 +1,5 @@
 import 'package:bmi_calculator/app_const.dart';
-import 'package:bmi_calculator/gender_icon.dart';
+import 'package:bmi_calculator/icon_content.dart';
 import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 
@@ -24,16 +24,16 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      child: GenderIcon(
-                        gender: Gender.male,
+                      child: IconContent(
+                        icon: Icons.male,
                         label: 'MALE',
                       ),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      child: GenderIcon(
-                        gender: Gender.female,
+                      child: IconContent(
+                        icon: Icons.female,
                         label: 'FEMALE',
                       ),
                     ),
